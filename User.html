@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tag.css">
+</head>
+
+</head>
+
+<body>
+  <div class="brand clearfix">
+    <span class="menu-btn"><i class="fa fa-bars"></i></span>
+    <ul class="ts-profile-nav">
+      <li class="ts-account">
+        <a href="#" style="text-decoration: none;">
+          <img src="image/ts-avatars.jpg" class="ts-avatar hidden-side">
+          <span class="username" style="color:yellow"></span>
+          <i class="fa fa-angle-down hidden-side"></i>
+        </a>
+        <ul>
+          <li><a href="#" class="account">My Account</a></li>
+          <li><a href="home.html" onclick="deleteCookie()">Log out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div><br><br><br><br>
+  <div class="container">
+    <center>
+      <h1>Welcome My User</h1><br>
+      <a href="home.html" class="btn btn-info" role="button" id="Back">Log Out</a>
+      <a href="#" class="view btn btn-info">View & Update Information</a>
+      <a href="#" class="edit btn btn-info">Edit Account</a>
+    </center>
+  </div>
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/cache.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/user.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+  <script type="text/javascript">
+    console.log($.cookie('keep'));
+
+    function deleteCookie() {
+      $.removeCookie('keep');
+      console.log($.removeCookie('keep'));
+    }
+
+    $(document).ready(function() {
+
+            $.urlParam = function(name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                return results[1] || 0;
+            }
+            $(function() {
+                var id = $.urlParam('id');
+                var url = "http://membershipwebapi977290.azurewebsites.net/api/Members/" + id;
+                console.log(url);
+                $.get(url, function(inf, status) {
+                    console.log(inf);
+                    $('.account').attr('href', "account.html?id=" + inf.Id);
+                    $(".my-profile").attr('href', "my-profile.html?id=" + inf.Id);
+                    $('.username').html(inf.UserName);
+                    $(".view").attr('href', "Viewinfo.html?id=" + inf.Id);
+                    $(".edit").attr('href', "edituser.html?id=" + inf.Id);
+                    $(".dashboard").attr('href', "User.html?id=" + inf.Id);
+                });
+            });
+
+    });
+
+  </script>
+</body>
+
+</html>

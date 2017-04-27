@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tag.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="home.html"><span class="glyphicon glyphicon-globe"></span>System Site</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="home.html"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+      <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="signin.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+     <div class="container">
+      <h2>New Member Registration</h2>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Registration to the system</h3>
+        </div>
+      <div class="panel-body">
+        <div class="wrapper">
+        <div id="err" style="display:none" class="alert alert-danger alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+          <strong>Incorrect!!! : </strong>
+          <span style="color:blue;font-weight:bold" id="summary">
+      Your form contains tons of errors! Please try again.</span>
+        </div>
+        <div id="suc" style="display:none" class="alert alert-success alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+          <strong>Regist Successful!!!</strong>
+        </div>
+
+        <form id="signupForm" class="form-signup" action="" method="POST" role="form">
+          <center>
+            <h2 class="form-signin-heading">Register for a new user</h2></center>
+
+          <div class="form-group">
+            <h4><label for="username">Username</label></h4>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username has max length to 12" maxlength="12" autofocus/>
+          </div>
+
+          <div class="form-group">
+            <h4><label for="password">Password</label></h4>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password has max length to 12" maxlength="12">
+          </div>
+
+          <div class="form-group">
+            <h4><label for="con_password">Confirm Password</label></h4>
+            <input type="password" class="form-control" id="con_password" name="con_password" placeholder="Password has max length to 12" maxlength="12">
+          </div>
+
+          <div class="form-group">
+            <h4><label for="fname">First name</label></h4>
+            <input type="text" class="form-control" id="fname" name="fname" placeholder="Put a First Name here.">
+          </div>
+
+          <div class="form-group">
+            <h4><label for="lname">Last name</label></h4>
+            <input type="text" class="form-control" id="lname" name="lname" placeholder="Put a Last Name here.">
+          </div>
+
+          <div class="form-group">
+            <h4><label for="email">E-Mail Address</label></h4>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Put an E-mail here.">
+          </div>
+
+          <div class="form-group">
+            <h4><label for="tel">Telephone</label></h4>
+            <input type="text" class="form-control" id="tel" name="tel" maxlength="10" placeholder="Put a Telephone here.">
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary btn-block" id="signup" name="button">Register</button>
+          </div>
+
+        </form>
+      </div>
+      <div class="panel-footer"></div>
+      </div>
+     </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/cache.js"></script>
+  <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="js/singup.js"></script>
+    <script type="text/javascript">
+      $("#signup").click(function() {
+        var newuser = {
+            username:"",
+            password:"",
+            firstname:"",
+            lastname:"",
+            email:"",
+            tel:""
+        };
+        newuser.username = $("#username").val();
+        newuser.password = $("#password").val();
+        newuser.firstname = $("#fname").val();
+        newuser.lastname = $("#lname").val();
+        newuser.email = $("#email").val();
+        newuser.tel = $("#tel").val();
+        console.log(newuser);
+
+        var url = "http://membershipwebapi977290.azurewebsites.net/api/Members";
+        $.post(url, newuser, function(data, status) {
+          console.log("Inserted " + data);
+        });
+
+      });
+    </script>
+  </body>
+</html>
